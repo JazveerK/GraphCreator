@@ -3,7 +3,7 @@
 // Initialize the graph
 Graph::Graph() : vertexCount(0) {}
 
-//Add a vertex
+// Add a vertex
 void Graph::addVertex(const string& label) {
     if (vertexIndex.find(label) != vertexIndex.end()) {
         cout << "Vertex already exists." << endl;
@@ -13,9 +13,9 @@ void Graph::addVertex(const string& label) {
     indexVertex.push_back(label);
     vertexCount++;
 
-    // Resize the adjacency matrix to accommodate the new vertex
-    for (auto& row : adjMatrix) {
-        row.push_back(INT_MAX);
+    // Resize the adjacency matrix
+    for (size_t i = 0; i < adjMatrix.size(); i++) {
+        adjMatrix[i].push_back(INT_MAX);
     }
     vector<int> newRow(vertexCount, INT_MAX);
     adjMatrix.push_back(newRow);
@@ -24,7 +24,7 @@ void Graph::addVertex(const string& label) {
     adjMatrix[vertexCount - 1][vertexCount - 1] = 0;
 }
 
-// Add edge
+// Add an edge
 void Graph::addEdge(const string& start, const string& end, int weight) {
     if (vertexIndex.find(start) == vertexIndex.end() || vertexIndex.find(end) == vertexIndex.end()) {
         cout << "One or both vertices do not exist." << endl;
@@ -35,7 +35,7 @@ void Graph::addEdge(const string& start, const string& end, int weight) {
     adjMatrix[startIndex][endIndex] = weight;
 }
 
-//Remove a vertex
+// Remove a vertex
 void Graph::removeVertex(const string& label) {
     if (vertexIndex.find(label) == vertexIndex.end()) {
         cout << "Vertex does not exist." << endl;
@@ -43,26 +43,26 @@ void Graph::removeVertex(const string& label) {
     }
     int index = vertexIndex[label];
 
-    //Remove vertex from the maps
+    // Remove vertex from the maps
     vertexIndex.erase(label);
     indexVertex.erase(indexVertex.begin() + index);
 
-    for (auto& pair : vertexIndex) {
-        if (pair.second > index) {
-            pair.second--;
+    for (unordered_map<string, int>::iterator it = vertexIndex.begin(); it != vertexIndex.end(); ++it) {
+        if (it->second > index) {
+            it->second--;
         }
     }
 
-    //Remove the row and column from the adjacency matrix
+    // Remove the row and column from the adjacency matrix
     adjMatrix.erase(adjMatrix.begin() + index);
-    for (auto& row : adjMatrix) {
-        row.erase(row.begin() + index);
+    for (size_t i = 0; i < adjMatrix.size(); i++) {
+        adjMatrix[i].erase(adjMatrix[i].begin() + index);
     }
 
     vertexCount--;
 }
 
-//Remove an edge
+// Remove an edge
 void Graph::removeEdge(const string& start, const string& end) {
     if (vertexIndex.find(start) == vertexIndex.end() || vertexIndex.find(end) == vertexIndex.end()) {
         cout << "One or both vertices do not exist." << endl;
@@ -73,7 +73,7 @@ void Graph::removeEdge(const string& start, const string& end) {
     adjMatrix[startIndex][endIndex] = INT_MAX;
 }
 
-//Print the adjacency table
+// Print the adjacency table
 void Graph::printTable() const {
     cout << "Adjacency Matrix:" << endl;
     for (int i = 0; i < vertexCount; i++) {
@@ -119,7 +119,9 @@ void Graph::findShortestPath(const string& start, const string& end) const {
 
     if (dist[dest] == INT_MAX) {
         cout << "No path exists from " << start << " to " << end << endl;
-    } else {
+    } 
+    
+    else {
         cout << "Shortest path from " << start << " to " << end << ":" << endl;
         vector<int> path;
         for (int v = dest; v != -1; v = parent[v]) {

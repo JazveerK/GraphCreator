@@ -10,9 +10,9 @@
 using namespace std;
 
 class Graph {
-    unordered_map<string, int> vertexIndex;  //keep track of vertex indices
-    vector<string> indexVertex;  // vertex labels
-    vector<vector<int> > adjMatrix;  //Adjcency matrix
+    unordered_map<string, int> vertexIndex;  // Keep track of vertex indices
+    vector<string> indexVertex;  // Vertex labels
+    vector<vector<int> > adjMatrix;  // Adjacency matrix
     int vertexCount;  // Number of vertices
 
 public:

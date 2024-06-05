@@ -27,14 +27,14 @@ int main() {
         else if (command == "EDGE") {
             string start, end;
             int weight;
-            cout << "Enter edge start vertex, end vertex, and weight (seperated by a space): ";
+            cout << "Enter edge start vertex, end vertex, and weight (seperated by spaces): ";
             cin >> start >> end >> weight;
             graph.addEdge(start, end, weight);
         } 
         
         else if (command == "DE") {
             string start, end;
-            cout << "Enter edge start vertex and end vertex to delete (seperated by a space): ";
+            cout << "Enter edge start vertex and end vertex to delete (seperated by spaces): ";
             cin >> start >> end;
             graph.removeEdge(start, end);
         } 
@@ -52,7 +52,7 @@ int main() {
         
         else if (command == "PATH") {
             string start, end;
-            cout << "Enter start and end vertex to find shortest path (seperated by a space): ";
+            cout << "Enter start and end vertex to find shortest path (seperated by spaces): ";
             cin >> start >> end;
             graph.findShortestPath(start, end);
         } 
