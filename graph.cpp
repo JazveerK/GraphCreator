@@ -1,4 +1,7 @@
 #include "graph.h"
+#include <algorithm> //need this package for windows
+#include <iostream>
+#include <vector>
 
 // Initialize the graph
 Graph::Graph() : vertexCount(0) {}
